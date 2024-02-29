@@ -1,39 +1,79 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Booking</title>
-    <link rel = "stylesheet" href = "index-stylesheet.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="index-stylesheet.css">
 </head>
+
 <body>
-    <div class="form-container">
-        <h2>Flight Booking</h2>
-        <label for="flightType">Select Flight Type:</label>
-        <select id="flightType">
-            <option value="direct">Direct Flight</option>
-            <option value="multi-stop">Multi-Stop Flight</option>
-        </select><br><br>
+    <nav class="navbar bg-body-light">
+        <div class="container-fluid">
+            <h2>Airplane Ticket Booking Site</h2>
+        </div>
+    </nav>
+    <div class="below-navbar">
+        <div class="form-container">
+            <h3>Filters</h3><br>
+            <div class="form-group">
+                <p class="form-label">Flight Type</p>
+                <div class="form-check">
+                    <input class = "form-check-input" type = "checkbox">
+                    <label class="form-check-label">Direct Flight</label>
+                </div>
+                <div class="form-check">
+                    <input class = "form-check-input" type = "checkbox">
+                    <label class = "form-check-label">Multi-Stop Flight</label>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <p class="form-label">Trip Type</p>
+                <div class="form-check">
+                    <input class = "form-check-input" type = "checkbox">
+                    <label class="form-check-label">One-Way</label>
+                </div>
+                <div class="form-check">
+                    <input class = "form-check-input" type = "checkbox">
+                    <label class= "form-check-label">Round-Trip</label>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <p class="form-label">Select Ticket Format</p>
+                <select class="form-select">
+                    <option selected value="12-hour">12-Hour</option>
+                    <option value="24-hour">24-Hour</option>
+                </select>
+            </div>
+        </div>
+        <div class="flights-container">
+            <div class="flight-data">
 
-        <label for="tripType">Select Trip Type:</label>
-        <select id="tripType">
-            <option value="one-way">One Way</option>
-            <option value="round-trip">Round Trip</option>
-        </select><br><br>
+            </div>
+            <div class="flight-data">
 
-        <label for="flightTime">Select Flight Time (24-hour format):</label>
-        <input type="time" id="flightTime" value="12:00"><br><br>
+            </div>
+            <div class="flight-data">
 
-        <label for="ticketFormat">Select Ticket Format:</label>
-        <select id="ticketFormat">
-            <option value="12-hour">12-hour</option>
-            <option value="24-hour">24-hour</option>
-        </select><br><br>
+            </div>
+            <div class="flight-data">
 
-        <button onclick="calculateFlightTime()">Calculate Flight Time</button><br><br>
-
-        <div id="totalFlightTime"></div>
+            </div>
+        </div>
     </div>
-    <script src = "index-script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
