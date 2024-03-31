@@ -1,7 +1,3 @@
-package main;
-
-import java.util.Scanner;
-
 public class FlightOperations {
     // Flights Array List
     public static Flight[] weeklyFlights = {
@@ -11,41 +7,7 @@ public class FlightOperations {
             new Flight("Miami", "London", "20:00", "10:00")
     };
 
-    public boolean bookFlight() {
-        // Input Scanner
-        Scanner inputs = new Scanner(System.in);
-        int secondFlightChoice = 0;
-        // Program Interaction
-        System.out.println();
-        System.out.println("Welcome to the Flight Ticket Booking Application.");
-        System.out.println("Listed below are the available weekly flights.");
-        //Flights Output
-        System.out.println("==========================================");
-        for (int i = 0; i<weeklyFlights.length;i++){
-            System.out.println();
-            System.out.println("Flight " + (i+1) + ":");
-            System.out.println("Origin:\t\t\t" + weeklyFlights[i].getOrigin());
-            System.out.println("Destination:\t" + weeklyFlights[i].getDestination());
-            System.out.println("Departure Time:\t" + weeklyFlights[i].getDepartureTime());
-            System.out.println("Arrival Time:\t" + weeklyFlights[i].getArrivalTime());
-        }
-        System.out.println();
-        System.out.println("==========================================");
-        // Prompts to gather information
-        System.out.println("Please select the flight you'd like to book (1-" + weeklyFlights.length + ")" );
-        int flightChoice = inputs.nextInt();
-        inputs.nextLine(); // Consume newline character
-        System.out.println("\nWould you like to make this a multi-stop flight? (y/n)");
-        String multistop = inputs.nextLine();
-        if (multistop.equals("y")){
-            System.out.println("\nWhich flight would you like to add to your existing flight? (1-" + weeklyFlights.length + ")" );
-            secondFlightChoice = inputs.nextInt();
-        }
-        System.out.println("\nWould you like your ticket to be one-way [1], or round-trip [2]?");
-        int roundTripOrOneWay = inputs.nextInt();
-        System.out.println("\nWould you like your ticket in 12h [1] or 24h [2] format?");
-        int timeFormat = inputs.nextInt();
-
+    public boolean bookFlight(int flightChoice, String multistop, int secondFlightChoice, int roundTripOrOneWay, int timeFormat) {
         // Send flight for validation
         boolean isValidFlight;
         // To determine if a second flight was entered.
@@ -96,7 +58,7 @@ public class FlightOperations {
             return flightTimeHours;
     }
 
-    public boolean validateFlight(int flightChoice, String multistop, int secondFlightChoice, int roundTripOrOneWay, int timeFormat) {
+    private boolean validateFlight(int flightChoice, String multistop, int secondFlightChoice, int roundTripOrOneWay, int timeFormat) {
         // Error if Entered Flight Doesn't Exist
         if (flightChoice <= 0 || flightChoice > weeklyFlights.length) {
             System.out.println("Error In Ticket Validation: Entered Flight Not Found");
@@ -123,11 +85,13 @@ public class FlightOperations {
         // Error if Invalid Option for Trip Type Selected
         if ((roundTripOrOneWay<1) || (roundTripOrOneWay>2)) {
             System.out.println("Error In Ticket Validation: Invalid Option for Trip Type Selected");
+            return false;
         }
 
         // Error if Invalid Option for Trip Type Selected
         if ((timeFormat<1) || (timeFormat>2)) {
             System.out.println("Error In Ticket Validation: Invalid Option for Ticket Time Format Selected");
+            return false;
         }
 
         // If no errors are triggered
