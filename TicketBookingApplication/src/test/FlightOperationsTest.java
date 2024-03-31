@@ -1,73 +1,94 @@
 package test;
+
 import main.Flight;
 import main.FlightOperations;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static junit.framework.TestCase.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FlightOperationsTest {
-    @Test
-    public void bookFlightValidInput() {
-        // Test valid input parameters
-        FlightOperations bookingSystem = new FlightOperations();
-        boolean isBooked = bookingSystem.bookFlight("JFK", "LAX", "10:00", "13:00", true, false);
-        assertTrue(isBooked);
+
+    private FlightOperations flightOperations;
+
+    @BeforeEach
+    void setUp() {
+        flightOperations = new FlightOperations();
     }
 
     @Test
-    public void bookFlightInvalidInput1() {
-        // Test invalid input parameters
-        FlightOperations bookingSystem = new FlightOperations();
-        boolean isBooked = bookingSystem.bookFlight("", "LAX", "10:00", "13:00", true, false);
-        assertFalse(isBooked);
+    void testBookFlightOneWay12HourFormat() {
+        assertTrue(flightOperations.bookFlight());
     }
 
     @Test
-    public void bookFlightInvalidInput2() {
-        // Test invalid input parameters
-        FlightOperations bookingSystem = new FlightOperations();
-        boolean isBooked = bookingSystem.bookFlight("LAX", "", "10:00", "13:00", true, false);
-        assertFalse(isBooked);
+    void testBookFlightRoundTrip24HourFormat() {
+        assertTrue(flightOperations.bookFlight());
     }
 
     @Test
-    public void bookFlightInvalidInput3()  {
-        // Test validating an invalid flight
-        FlightOperations bookingSystem = new FlightOperations();
-        boolean isValid = bookingSystem.bookFlight("LAX", "LAX", "10:00", "13:00", false, false);
-        assertFalse(isValid);
+    void testBookFlightInvalidFlightChoice() {
+        assertFalse(flightOperations.bookFlight());
     }
 
     @Test
-    public void calculateTotalFlightTimeOfMultipleFlights() {
-        // Test calculating total flight time
-        FlightOperations bookingSystem = new FlightOperations();
-        Flight flight1 = new Flight("JFK", "LAX", "10:00", "13:00", false);
-        Flight flight2 = new Flight("LAX", "SFO", "14:00", "16:00", false);
-        List<Flight> flights = Arrays.asList(flight1, flight2);
-        int totalFlightTime = bookingSystem.calculateTotalFlightTime(flights);
-        assertEquals(5, totalFlightTime);
+    void testBookFlightInvalidMultistopChoice() {
+        assertFalse(flightOperations.bookFlight());
     }
 
     @Test
-    public void calculateTotalFlightTimeOfSingleFlight() {
-        // Test calculating total flight time with only one flight
-        FlightOperations bookingSystem = new FlightOperations();
-        Flight flight = new Flight("JFK", "LAX", "10:00", "13:00", false);
-        List<Flight> flights = Arrays.asList(flight);
-        int totalFlightTime = bookingSystem.calculateTotalFlightTime(flights);
+    void testBookFlightInvalidSecondFlightChoice() {
+        assertFalse(flightOperations.bookFlight());
+    }
+
+    @Test
+    void testCalculateTotalFlightTime() {
+        Flight flight = new Flight("New York", "Los Angeles", "08:00", "11:00");
+        int totalFlightTime = flightOperations.calculateTotalFlightTime(flight);
         assertEquals(3, totalFlightTime);
     }
 
     @Test
-    public void calculateTotalFlightTimeWithNoFlights() {
-        // Test calculating total flight time with an empty list of flights
-        FlightOperations bookingSystem = new FlightOperations();
-        List<Flight> flights = Arrays.asList();
-        int totalFlightTime = bookingSystem.calculateTotalFlightTime(flights);
-        assertEquals(0, totalFlightTime);
+    void testConvertTimeFormat12HourFormat() {
+        String time = "13:30";
+        String convertedTime = flightOperations.convertTimeFormat(time, 1);
+        assertEquals("1:30 PM", convertedTime);
+    }
+
+    @Test
+    void testConvertTimeFormat24HourFormat() {
+        String time = "13:30";
+        String convertedTime = flightOperations.convertTimeFormat(time, 2);
+        assertEquals("13:30", convertedTime);
+    }
+
+    @Test
+    void testValidateFlightInvalidRoundTripOrOneWay() {
+        assertFalse(flightOperations.validateFlight(1, "n", 0, 0, 1));
+    }
+
+    @Test
+    void testValidateFlightInvalidTimeFormat() {
+        assertFalse(flightOperations.validateFlight(1, "n", 0, 1, 0));
+    }
+
+    @Test
+    void testValidateFlightValidOneWay() {
+        assertTrue(flightOperations.validateFlight(1, "n", 0, 1, 1));
+    }
+
+    @Test
+    void testValidateFlightValidRoundTrip() {
+        assertTrue(flightOperations.validateFlight(1, "n", 0, 2, 1));
+    }
+
+    @Test
+    void testValidateFlightValidMultistop() {
+        assertTrue(flightOperations.validateFlight(1, "y", 2, 1, 1));
+    }
+
+    @Test
+    void testValidateFlightInvalidMultistopSameFlight() {
+        assertFalse(flightOperations.validateFlight(1, "y", 1, 1, 1));
     }
 }

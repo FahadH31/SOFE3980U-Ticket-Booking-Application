@@ -5,14 +5,12 @@ public class Flight {
     private String destination;
     private String departureTime;
     private String arrivalTime;
-    private boolean multiStop;
 
-    public Flight(String origin, String destination, String departureTime, String arrivalTime, boolean multiStop) {
+    public Flight(String origin, String destination, String departureTime, String arrivalTime) {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-        this.multiStop = multiStop;
     }
 
     // Getters
@@ -30,9 +28,5 @@ public class Flight {
 
     public String getArrivalTime() {
         return arrivalTime;
-    }
-
-    public boolean isMultiStop() {
-        return multiStop;
     }
 }
