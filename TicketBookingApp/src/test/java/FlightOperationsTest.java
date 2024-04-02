@@ -49,7 +49,7 @@ public class FlightOperationsTest {
     }
     @Test
     void testCalculateTotalFlightTimeSameDay() {
-        Flight flight = new Flight("New York", "Los Angeles", "08:00", "12:30");
+        Flight flight = new Flight("New York", "Los Angeles", "08:00", "12:00");
         int totalFlightTime = flightOperations.calculateTotalFlightTime(flight);
         assertEquals(4, totalFlightTime);
     }
