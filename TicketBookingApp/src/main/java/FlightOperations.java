@@ -11,7 +11,7 @@ public class FlightOperations {
         // Send flight for validation
         boolean isValidFlight;
         // To determine if a second flight was entered.
-        if (multistop.equals("y")) {
+        if (multistop.equals("y") || multistop.equals("Y")) {
             isValidFlight= validateFlight(flightChoice, multistop, secondFlightChoice, roundTripOrOneWay, timeFormat);
         }
         else {
@@ -28,7 +28,7 @@ public class FlightOperations {
         // Calculate Flight Time
         int totalFlightTime;
         int totalFlightTime2 = 0;
-        if (multistop.equals("y")) {
+        if (multistop.equals("y") || multistop.equals("Y")) {
             totalFlightTime = calculateTotalFlightTime(weeklyFlights[flightChoice-1]);
             totalFlightTime2 = calculateTotalFlightTime(weeklyFlights[flightChoice-1]);
         }
@@ -65,7 +65,7 @@ public class FlightOperations {
             return false;
         }
         // If Multistop Selected
-        if (multistop.equals("y")) {
+        if (multistop.equals("y") || multistop.equals("Y")) {
             // Error if Entered Second Flight Doesn't Exist
             if (flightChoice == secondFlightChoice){
                 System.out.println("Error In Ticket Validation: Selected First Flight and Second Flight are the same ");
@@ -110,7 +110,7 @@ public class FlightOperations {
         System.out.println("Arrival Time: " + arrivalTime);
         System.out.println("Flight Time: " + totalFlightTime + " hours");
 
-        if (multistop.equals("y")) {
+        if (multistop.equals("y") || multistop.equals("Y")) {
             System.out.println("\nSecond Flight Route: " + weeklyFlights[secondFlightChoice - 1].getOrigin() + " -> " + weeklyFlights[secondFlightChoice - 1].getDestination());
 
             // Format departure and arrival times for the second flight based on the user's preference
