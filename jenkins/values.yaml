@@ -1,5 +1,5 @@
 controller:
-  installPlugins:
+  installPlugins: 
     - kubernetes:latest
     - workflow-job:latest
     - workflow-aggregator:latest
